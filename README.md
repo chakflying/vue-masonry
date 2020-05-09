@@ -1,7 +1,6 @@
 # vue-masonry 
 
-![DEPENDENCIES status](https://david-dm.org/shershen08/vue-masonry/status.svg)
-[![](https://data.jsdelivr.com/v1/package/npm/vue-masonry/badge)](https://www.jsdelivr.com/package/npm/vue-masonry)
+This is a fork with dependency `imagesloaded` removed. Redraw is expected to be handled externally.
 
 **Current version: 0.11.8**
 

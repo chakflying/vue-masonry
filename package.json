@@ -1,6 +1,6 @@
 {
   "name": "vue-masonry",
-  "version": "0.11.8",
+  "version": "0.11.8m",
   "description": "masonry layout for vue.js",
   "main": "src/masonry.plugin.js",
   "scripts": {
@@ -9,10 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shershen08/vue-masonry.git"
+    "url": "git+https://github.com/chakflying/vue-masonry.git"
   },
   "dependencies": {
-    "imagesloaded": "4.1.4",
     "masonry-layout": "^4.2.2",
     "vue": "^2.0.0"
   },

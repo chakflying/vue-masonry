@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new webpack.BannerPlugin({
-      banner: `${tagline} \n https://github.com/shershen08/vue-masonry/ \n file:[file]`
+      banner: `${tagline} \n https://github.com/chakflying/vue-masonry/ \n file:[file]`
     })
   ]
 }

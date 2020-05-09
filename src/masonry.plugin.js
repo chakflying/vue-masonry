@@ -1,5 +1,4 @@
 import Masonry from 'masonry-layout'
-import ImageLoaded from 'imagesloaded'
 
 const attributesMap = {
   'column-width': 'columnWidth',
@@ -16,7 +15,6 @@ const attributesMap = {
 }
 const EVENT_ADD = 'vuemasonry.itemAdded'
 const EVENT_REMOVE = 'vuemasonry.itemRemoved'
-const EVENT_IMAGE_LOADED = 'vuemasonry.imageLoaded'
 const EVENT_DESTROY = 'vuemasonry.destroy'
 
 const stringToBool = function (val) { return (val + '').toLowerCase() === 'true' }
@@ -70,14 +68,12 @@ VueMasonryPlugin.install = function (Vue, options) {
       const masonryDestroyHandler = function (eventData) {
         Events.$off(`${EVENT_ADD}__${masonryId}`, masonryRedrawHandler)
         Events.$off(`${EVENT_REMOVE}__${masonryId}`, masonryRedrawHandler)
-        Events.$off(`${EVENT_IMAGE_LOADED}__${masonryId}`, masonryRedrawHandler)
         Events.$off(`${EVENT_DESTROY}__${masonryId}`, masonryDestroyHandler)
         masonry.destroy()
       }
 
       Events.$on(`${EVENT_ADD}__${masonryId}`, masonryRedrawHandler)
       Events.$on(`${EVENT_REMOVE}__${masonryId}`, masonryRedrawHandler)
-      Events.$on(`${EVENT_IMAGE_LOADED}__${masonryId}`, masonryRedrawHandler)
       Events.$on(`${EVENT_DESTROY}__${masonryId}`, masonryDestroyHandler)
     },
     unbind: function (el, binding) {
@@ -92,12 +88,6 @@ VueMasonryPlugin.install = function (Vue, options) {
       const masonryId = binding.value || defaultId
       Events.$emit(`${EVENT_ADD}__${masonryId}`, {
         'element': el
-      })
-      // eslint-disable-next-line
-      new ImageLoaded(el, function () {
-        Events.$emit(`${EVENT_IMAGE_LOADED}__${masonryId}`, {
-          'element': el
-        })
       })
     },
     unbind: function (el, binding) {

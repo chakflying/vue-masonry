@@ -1,6 +1,6 @@
 {
   "name": "vue-masonry",
-  "version": "1.11.8.1",
+  "version": "1.11.9",
   "description": "masonry layout for vue.js",
   "main": "src/masonry.plugin.js",
   "scripts": {

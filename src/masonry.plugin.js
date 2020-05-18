@@ -1,22 +1,29 @@
 import Masonry from 'masonry-layout'
 
-const attributesMap = {
-  'column-width': 'columnWidth',
-  'transition-duration': 'transitionDuration',
-  'item-selector': 'itemSelector',
-  'origin-left': 'originLeft',
-  'origin-top': 'originTop',
-  'fit-width': 'fitWidth',
-  'stamp': 'stamp',
-  'gutter': 'gutter',
-  'percent-position': 'percentPosition',
-  'horizontal-order': 'horizontalOrder',
-  'stagger': 'stagger',
-  'destroy-delay': 'destroyDelay'
-}
+// const attributesMap = {
+//   'column-width': 'columnWidth',
+//   'transition-duration': 'transitionDuration',
+//   'item-selector': 'itemSelector',
+//   'origin-left': 'originLeft',
+//   'origin-top': 'originTop',
+//   'fit-width': 'fitWidth',
+//   'stamp': 'stamp',
+//   'gutter': 'gutter',
+//   'percent-position': 'percentPosition',
+//   'horizontal-order': 'horizontalOrder',
+//   'stagger': 'stagger',
+//   'destroy-delay': 'destroyDelay'
+// }
 const EVENT_ADD = 'vuemasonry.itemAdded'
 const EVENT_REMOVE = 'vuemasonry.itemRemoved'
 const EVENT_DESTROY = 'vuemasonry.destroy'
+
+const snakeToCamel = (str) => str.replace(
+  /([-_][a-z])/g,
+  (group) => group.toUpperCase()
+                  .replace('-', '')
+                  .replace('_', '')
+);
 
 const stringToBool = function (val) { return (val + '').toLowerCase() === 'true' }
 
@@ -26,15 +33,13 @@ const collectOptions = function (attrs) {
   const res = {}
   const attributesArray = Array.prototype.slice.call(attrs)
   attributesArray.forEach(function (attr) {
-    if (Object.keys(attributesMap).indexOf(attr.name) > -1) {
       if (attr.name.indexOf('origin') > -1) {
-        res[attributesMap[attr.name]] = stringToBool(attr.value)
+        res[snakeToCamel(attr.name)] = stringToBool(attr.value)
       } else if (attr.name === 'column-width' || attr.name === 'gutter') {
-        res[attributesMap[attr.name]] = numberOrSelector(attr.value)
+        res[snakeToCamel(attr.name)] = numberOrSelector(attr.value)
       } else {
-        res[attributesMap[attr.name]] = attr.value
+        res[snakeToCamel(attr.name)] = attr.value
       }
-    }
   })
   return res
 }
@@ -46,7 +51,7 @@ VueMasonryPlugin.install = function (Vue, options) {
   const defaultId = 'VueMasonry'
 
   Vue.directive('masonry', {
-    props: ['transitionDuration', ' itemSelector', 'destroyDelay'],
+    props: ['transitionDuration', 'itemSelector', 'destroyDelay'],
 
     inserted: function (el, binding) {
       if (!Masonry) {
